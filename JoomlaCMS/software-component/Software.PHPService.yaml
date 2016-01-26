@@ -1,0 +1,60 @@
+'@type': "SoftwareComponentType"
+createdDate: "2016-01-21T21:01:02.728Z"
+lastUpdated: "2016-01-26T20:05:52.277Z"
+id: "Software.PHPService"
+name: "PHP 5.4.45-3"
+description: "This will install the remi yum repo, then install/configure PHP 5.4.45.\
+  \ This version PHP meets the minimum version requirement for Joomla 3.4.x"
+publishStatus: "PUBLISHED"
+publishStatusName: "Published"
+schema:
+  fields:
+  - id: "host"
+    label: ""
+    description: ""
+    dataType:
+      type: "ref"
+      componentTypeId: "com.vmware.csp.iaas.blueprint.service"
+      classId: "Infrastructure.Machine.Schema"
+      label: "Machine"
+    state:
+      dependencies: []
+      facets:
+      - type: "visible"
+        value:
+          type: "constantClause"
+          value:
+            type: "boolean"
+            value: false
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+containerFieldId: "host"
+lifecycleTasks:
+- createdDate: "2016-01-21T21:01:02.731Z"
+  lastUpdated: "2016-01-26T20:05:52.278Z"
+  script:
+    scriptContent: "#!/bin/bash\n/sbin/service httpd restart"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "START"
+    label: "Start"
+- createdDate: "2016-01-21T21:01:02.730Z"
+  lastUpdated: "2016-01-26T20:05:52.278Z"
+  script:
+    scriptContent: "#!/bin/bash\nwget http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm\n\
+      wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm\nrpm -Uvh --nosignature\
+      \ remi-release-6.rpm epel-release-6*.rpm --force\n/usr/bin/yum clean expire-cache\
+      \ --enablerepo=remi\n/usr/bin/yum --enablerepo=remi install php php-common php-mysql\
+      \ php-pgsql php-pecl-mongo php-sqlite php-pecl-memcache php-pecl-memcached php-gd\
+      \ php-mbstring php-mcrypt php-xml php-pecl-apc php-cli php-pear php-pdo -y"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "INSTALL"
+    label: "Install"
