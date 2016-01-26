@@ -1,0 +1,45 @@
+'@type': "SoftwareComponentType"
+createdDate: "2016-01-21T21:01:06.216Z"
+lastUpdated: "2016-01-21T21:01:06.641Z"
+id: "Software.SystemConfiguration"
+name: "System Configuration"
+publishStatus: "PUBLISHED"
+publishStatusName: "Published"
+schema:
+  fields:
+  - id: "host"
+    label: ""
+    description: ""
+    dataType:
+      type: "ref"
+      componentTypeId: "com.vmware.csp.iaas.blueprint.service"
+      classId: "Infrastructure.Machine.Schema"
+      label: "Machine"
+    state:
+      dependencies: []
+      facets:
+      - type: "visible"
+        value:
+          type: "constantClause"
+          value:
+            type: "boolean"
+            value: false
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+containerFieldId: "host"
+lifecycleTasks:
+- createdDate: "2016-01-21T21:01:06.219Z"
+  lastUpdated: "2016-01-21T22:01:53.946Z"
+  script:
+    scriptContent: "#!/bin/bash\n/sbin/chkconfig iptables off\n/sbin/chkconfig ip6tables\
+      \ off\n/sbin/service iptables stop\n/sbin/service ip6tables stop"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "INSTALL"
+    label: "Install"
