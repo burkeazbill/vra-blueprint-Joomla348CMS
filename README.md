@@ -20,3 +20,4 @@ When you visit the Web server's IP Address for the first time, you'll be greeted
 ![image](./Screenshots/joomla-landing-page.png)
 
 ## Installation
+Resremoved 
